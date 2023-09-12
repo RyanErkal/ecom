@@ -21,8 +21,6 @@ export default function CPUs() {
 		</div>
 	));
 
-	console.log(allCpus);
-
 	return (
 		<>
 			<div>

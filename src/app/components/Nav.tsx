@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Theme from "./Theme";
+import Cart from "./Cart";
 
 export default function Nav() {
 	return (
@@ -78,6 +79,9 @@ export default function Nav() {
 			<div className="navbar-end">
 				<Theme />
 				<p className="btn ml-2">Log In</p>
+				<div className="divider">
+					<Cart />
+				</div>
 			</div>
 		</div>
 	);

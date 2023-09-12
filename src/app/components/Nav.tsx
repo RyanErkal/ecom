@@ -77,7 +77,7 @@ export default function Nav() {
 
 			<div className="navbar-end">
 				<Theme />
-				<p className="btn">Log In</p>
+				<p className="btn ml-2">Log In</p>
 			</div>
 		</div>
 	);

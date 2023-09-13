@@ -18,15 +18,17 @@ export default function Card({
 }: CardProps) {
 	return (
 		<div className="card lg:card-side bg-base-200 shadow-xl" id={key}>
-			<figure>
-				<Image src={image} alt={title} width={500} height={500} />
+			<figure className="pt-8 lg:py-8">
+				<Image src={image} alt={title} width={200} height={200} />
 			</figure>
-			<div className="card-body">
-				<h2 className="card-title">{title}</h2>
+			<div className="card-body text-center lg:text-left">
+				<h2 className="text-2xl font-bold card-title text-center justify-center lg:justify-start lg:text-left">
+					{title}
+				</h2>
 				{children}
-				<p className="card-price">{price}</p>
-				<div className="card-actions justify-end">
-					<button className="btn btn-primary">Add to Cart</button>
+				<div className="card-actions justify-around items-center lg:justify-end lg:flex-col lg:items-end">
+					<h3 className="font-bold text-xl ">£{price}</h3>
+					<button className="btn btn-secondary">Add to Cart</button>
 				</div>
 			</div>
 		</div>

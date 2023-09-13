@@ -25,7 +25,7 @@ export default function Nav() {
 					</label>
 					<ul
 						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+						className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52">
 						<li>
 							<p>Products</p>
 							<ul className="p-2">
@@ -57,7 +57,7 @@ export default function Nav() {
 					<li tabIndex={0}>
 						<details>
 							<summary>Products</summary>
-							<ul className="p-2">
+							<ul className="p-2 z-[100]">
 								<li>
 									<Link href="/products">All</Link>
 								</li>

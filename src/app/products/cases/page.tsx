@@ -1,19 +1,19 @@
-"use client";
-
 import React from "react";
-import { useEffect, useState } from "react";
 import { getAllCases } from "@/app/firebase/firebase";
 
+const allCases = await getAllCases();
+
+interface Case {
+	id: string;
+	name?: string;
+	height?: string;
+	width?: string;
+	depth?: string;
+	weight?: string;
+}
+
 export default function Cases() {
-	const [allCases, setAllCases] = useState(Array());
-
-	useEffect(() => {
-		getAllCases().then((data) => {
-			setAllCases(data);
-		});
-	}, []);
-
-	const caseList = allCases?.map((compcase) => (
+	const caseList = allCases?.map((compcase: Case) => (
 		<div key={compcase.id}>
 			<h2>{compcase.name}</h2>
 			<p>{compcase.height}</p>

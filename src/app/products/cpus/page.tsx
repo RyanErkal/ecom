@@ -1,19 +1,17 @@
-"use client";
-
 import React from "react";
-import { useEffect, useState } from "react";
 import { getAllCpus } from "@/app/firebase/firebase";
 
+const allCpus = await getAllCpus();
+
+interface CPU {
+	id: string;
+	name?: string;
+	cores?: string;
+	threads?: string;
+}
+
 export default function CPUs() {
-	const [allCpus, setAllCpus] = useState(Array());
-
-	useEffect(() => {
-		getAllCpus().then((data) => {
-			setAllCpus(data);
-		});
-	}, []);
-
-	const cpuList = allCpus?.map((cpu) => (
+	const cpuList = allCpus?.map((cpu: CPU) => (
 		<div key={cpu.id}>
 			<h2>{cpu.name}</h2>
 			<p>{cpu.cores}</p>

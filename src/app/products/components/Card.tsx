@@ -18,7 +18,7 @@ export default function Card({
 }: CardProps) {
 	return (
 		<div className="card lg:card-side bg-base-200 shadow-xl" id={key}>
-			<figure className="pt-8 lg:py-8">
+			<figure className="pl-4 pt-8 lg:py-8">
 				<Image src={image} alt={title} width={200} height={200} />
 			</figure>
 			<div className="card-body text-center lg:text-left">

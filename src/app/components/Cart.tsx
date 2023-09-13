@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Cart() {
 	return (
-		<div className="drawer drawer-end">
+		<div className="drawer drawer-end z-[100]">
 			<input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 			<div className="drawer-content m-0">
 				{/* Page content here */}

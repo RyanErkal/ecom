@@ -1,7 +1,4 @@
 import React from "react";
-import CarouselGPU from "./components/Carousel";
-import CarouselCPU from "./components/CarouselCPU";
-import Stripe from "stripe";
 import Product from "./product/page";
 import ProductCard from "./components/ProductCard";
 
@@ -21,10 +18,10 @@ export default async function Home() {
 	const products = await getStripeProducts();
 	console.log(products);
 	return (
-		<div className="p-4 flex flex-col">
-			<div className="max-w-5xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+		<div className="p-6 flex flex-col">
+			<div className="mx-auto w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
 				{products.map((product: any) => (
-					<ProductCard key={product.id} product={product} />
+					<ProductCard id={product.id} product={product} />
 				))}
 			</div>
 		</div>

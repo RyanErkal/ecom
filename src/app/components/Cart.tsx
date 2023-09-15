@@ -2,10 +2,32 @@
 
 import React from "react";
 import useCart from "../(store)/store";
+import { useRouter } from "next/navigation";
 
 export default function Cart() {
 	const cart = useCart((state: any) => state.cart);
+	const router = useRouter();
 	console.log(cart);
+
+	async function checkout() {
+		const lineItems = cart.map((item: any) => {
+			return {
+				price: item.product.default_price.id,
+				quantity: item.quantity
+			};
+		});
+		console.log(lineItems);
+		const res = await fetch("../api", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ lineItems })
+		});
+		const data = await res.json();
+		router.push(data.session.url);
+	}
+
 	return (
 		<div className="drawer drawer-end z-[100]">
 			<input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -20,9 +42,10 @@ export default function Cart() {
 				<div className=" p-4 w-96 h-full bg-base-200 text-base-content">
 					<h3 className="text-3xl font-bold">Cart</h3>
 					<div className="flex flex-col justify-between">
-						<div>
-							{cart.length === 0 &&
-								"Your cart is empty. Add some items to your cart to see them here."}
+						<div className="">
+							{cart.length === 0 && (
+								<p className="text-sm">Your cart is empty.</p>
+							)}
 
 							{cart.length > 0 &&
 								cart.map((item: any, itemIndex: number) => (
@@ -38,7 +61,7 @@ export default function Cart() {
 													.unit_amount) /
 												100}
 										</p>
-										<button className="btn btn-secondary">
+										<button className="btn btn-secondary text-sm">
 											Remove
 										</button>
 									</div>
@@ -60,6 +83,15 @@ export default function Cart() {
 								</div>
 							)}
 						</div>
+						{cart.length > 0 && (
+							<div className="flex justify-end">
+								<button
+									className="btn btn-secondary font-bold text-2xl"
+									onClick={checkout}>
+									Checkout
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

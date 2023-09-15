@@ -64,7 +64,9 @@ export default function Cart() {
 
 							{cart.length > 0 &&
 								cart.map((item: any, itemIndex: number) => (
-									<div className="flex flex-row justify-between items-center bg-base-100 p-4 my-2 rounded-xl">
+									<div
+										className="flex flex-row justify-between items-center bg-base-100 p-4 my-2 rounded-xl"
+										key={itemIndex}>
 										<div className="flex flex-col">
 											<p
 												key={itemIndex}

@@ -75,13 +75,11 @@ const useCart = create<StoreState>((set) => ({
 		});
 	},
 	removeItemFromCart: (params: any) => {
-		const { itemIndex } = params;
+		const itemIDToRemove = params;
 		set((state: any) => {
-			const newCart = state.cart.filter(
-				(element: any, elementIndex: any) => {
-					return elementIndex !== itemIndex;
-				}
-			);
+			const newCart = state.cart.filter((item: any) => {
+				return item.product.id !== itemIDToRemove;
+			});
 			return {
 				...state,
 				cart: newCart

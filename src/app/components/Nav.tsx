@@ -45,7 +45,7 @@ export default function Nav() {
 						</li>
 					</ul>
 				</div>
-				<p className="btn btn-ghost normal-case text-xl">
+				<p className="btn btn-ghost normal-case invisible lg:visible lg:text-2xl">
 					<Link href="/">Erkommerce</Link>
 				</p>
 			</div>

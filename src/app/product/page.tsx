@@ -52,7 +52,7 @@ export default function ProductPage(props: any) {
 						</p>
 					</div>
 					<div>
-						<div className="w-full flex justify-center">
+						<div className="w-full flex justify-center px-12">
 							<button
 								className="btn btn-accent w-12 h-10"
 								onClick={() =>
@@ -62,7 +62,7 @@ export default function ProductPage(props: any) {
 								}>
 								-
 							</button>
-							<button className="btn btn-wide h-10">
+							<button className="btn w-full h-10 lg:w-20">
 								{quantity}
 							</button>
 							<button

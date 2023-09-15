@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 
 export default function Cart() {
 	const cart = useCart((state: any) => state.cart);
+	const removeItemFromCart = useCart((state) => state.removeItemFromCart);
 	const router = useRouter();
-	console.log(cart);
+	/* console.log(cart); */
 
 	async function checkout() {
 		const lineItems = cart.map((item: any) => {
@@ -16,7 +17,7 @@ export default function Cart() {
 				quantity: item.quantity
 			};
 		});
-		console.log(lineItems);
+		/* console.log(lineItems); */
 		const res = await fetch("../api", {
 			method: "POST",
 			headers: {
@@ -41,6 +42,15 @@ export default function Cart() {
 				<label htmlFor="my-drawer-4" className="drawer-overlay"></label>
 				<div className=" p-4 w-96 h-full bg-base-200 text-base-content">
 					<h3 className="text-3xl font-bold">Cart</h3>
+					<button
+						id="my-drawer-4"
+						type="button"
+						className="drawer-button absolute top-0 right-0 p-6 font-bold"
+						onClick={() => {
+							document.getElementById("my-drawer-4")?.click();
+						}}>
+						X
+					</button>
 					<h2 className="text-sm font-bold">
 						Test Card Number: 4242 4242 4242 4242
 					</h2>
@@ -55,18 +65,31 @@ export default function Cart() {
 							{cart.length > 0 &&
 								cart.map((item: any, itemIndex: number) => (
 									<div className="flex flex-row justify-between items-center bg-base-100 p-4 my-2 rounded-xl">
-										<p key={itemIndex}>
-											{item.product.name}
-										</p>
-										<p>x{item.quantity}</p>
-										<p>
-											£
-											{(item.quantity *
-												item.product.default_price
-													.unit_amount) /
-												100}
-										</p>
-										<button className="btn btn-secondary text-sm">
+										<div className="flex flex-col">
+											<p
+												key={itemIndex}
+												className="font-bold">
+												{item.product.name}
+											</p>
+											<div className="flex">
+												<p>x{item.quantity}</p>
+												<p className="ml-2">
+													£
+													{(item.quantity *
+														item.product
+															.default_price
+															.unit_amount) /
+														100}
+												</p>
+											</div>
+										</div>
+										<button
+											className="btn btn-sm lg:btn text-sm"
+											onClick={() => {
+												removeItemFromCart(
+													item.product.id
+												);
+											}}>
 											Remove
 										</button>
 									</div>

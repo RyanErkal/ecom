@@ -19,13 +19,15 @@ export default function ProductPage(props: any) {
 		router.push("/");
 	}
 
-	const productFeatures = product.features.map((feature: any) => {
-		return (
-			<div className="flex flex-col gap-2 mt-2">
-				<h3 className="text-xl font-bold">{feature.name}</h3>
-			</div>
-		);
-	});
+	if (product) {
+		const productFeatures = product.features.map((feature: any) => {
+			return (
+				<div className="flex flex-col gap-2 mt-2">
+					<h3 className="text-xl font-bold">{feature.name}</h3>
+				</div>
+			);
+		});
+	}
 
 	function handleAddToCart() {
 		const newItem = {

@@ -20,7 +20,7 @@ export default function ProductCard({
 	function onProductClick() {
 		const newProduct = product;
 		setProduct({ newProduct });
-		router.push("/product?product_id=" + product.id);
+		router.push("/product");
 	}
 
 	function handleAddToCart(e: Event) {

@@ -3,14 +3,21 @@ import React from "react";
 import { useState } from "react";
 import useCart from "../(store)/store";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ProductPage(props: any) {
 	const product = useCart((state) => state.product);
 	const addItemToCart = useCart((state) => state.addItemToCart);
 	const [quantity, setQuantity] = useState(1);
+	const searchParams = props.searchParams;
 
-	console.log(product);
-	console.log(product.features);
+	/* console.log(product);
+	console.log(product.features); */
+
+	if (!product) {
+		const router = useRouter();
+		router.push("/");
+	}
 
 	const productFeatures = product.features.map((feature: any) => {
 		return (
@@ -19,10 +26,6 @@ export default function ProductPage(props: any) {
 			</div>
 		);
 	});
-
-	if (!product) {
-		window.location.href = "/";
-	}
 
 	function handleAddToCart() {
 		const newItem = {

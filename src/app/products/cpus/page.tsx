@@ -1,38 +1,33 @@
 import React from "react";
-import { getAllCpus } from "@/app/firebase/firebase";
-import Card from "../components/Card";
+import ProductCard from "../../components/ProductCard";
 
-const allCpus = await getAllCpus();
-
-interface CPU {
-	id: string;
-	image?: string;
-	name?: string;
-	cores?: string;
-	threads?: string;
-	turboclock?: string;
-	price?: number;
+async function getStripeProducts() {
+	const Stripe = require("stripe");
+	const stripe = Stripe(
+		"sk_test_51Nq7BXCCN8mM1iY0qavKDs0OQClwegL9KrcoqvQcFedjvsry5Ljtrmgh0pEaTnU0JHrRjZIkSQnLpHCeIO2e8dMV00k7UsPVy2"
+	);
+	const res = await stripe.products.list({
+		expand: ["data.default_price"]
+	});
+	const products = res.data;
+	return products;
 }
 
-export default function CPUs() {
-	const cpuList = allCpus?.map((cpu: CPU) => (
-		<Card key={cpu.id} image={cpu.image} price={cpu.price} title={cpu.name}>
-			<p>{cpu.cores}</p>
-			<p>{cpu.threads}</p>
-			<p>{cpu.turboclock}</p>
-		</Card>
-	));
-
+export default async function Cpus() {
+	const products = await getStripeProducts();
+	/* console.log(products); */
 	return (
-		<>
-			<div>
-				<h1 className="text-3xl font-bold text-center m-4 text-secondary">
-					CPUs
-				</h1>
-				<div className="grid grid-cols-1 gap-6 m-6 md:grid-cols-2 xl:grid-cols-3">
-					{cpuList}
-				</div>
+		<div className="p-6 flex flex-col">
+			<h1 className="text-3xl font-bold p-6 text-center">CPUs</h1>
+			<div className="mx-auto w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
+				{products
+					.filter(
+						(product: any) => product.metadata.category === "cpu"
+					)
+					.map((product: any) => (
+						<ProductCard id={product.id} product={product} />
+					))}
 			</div>
-		</>
+		</div>
 	);
 }

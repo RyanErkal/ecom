@@ -1,5 +1,4 @@
 import React from "react";
-import Product from "./product/page";
 import ProductCard from "./components/ProductCard";
 
 async function getStripeProducts() {
@@ -16,9 +15,12 @@ async function getStripeProducts() {
 
 export default async function Home() {
 	const products = await getStripeProducts();
-	console.log(products);
+	/* console.log(products); */
 	return (
 		<div className="p-6 flex flex-col">
+			<h1 className="text-3xl font-bold p-6 text-center">
+				Featured Products
+			</h1>
 			<div className="mx-auto w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
 				{products.map((product: any) => (
 					<ProductCard id={product.id} product={product} />

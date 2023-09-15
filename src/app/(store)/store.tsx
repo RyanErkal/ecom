@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { produce } from "immer";
 
 interface StoreState {
 	cart: any;
@@ -12,7 +11,7 @@ interface StoreState {
 	emptyCart: () => void;
 }
 
-const useCart = create<StoreState>((set) => ({
+const useCart = create<StoreState>()((set) => ({
 	cart: [],
 	product: {},
 	openModal: false,

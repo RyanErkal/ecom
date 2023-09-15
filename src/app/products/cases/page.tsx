@@ -1,44 +1,33 @@
 import React from "react";
-import { getAllCases } from "@/app/firebase/firebase";
-import Card from "../components/Card";
+import ProductCard from "../../components/ProductCard";
 
-const allCases = await getAllCases();
-
-interface Case {
-	id?: string;
-	image?: string;
-	name?: string;
-	height?: string;
-	width?: string;
-	depth?: string;
-	weight?: string;
-	price?: number;
+async function getStripeProducts() {
+	const Stripe = require("stripe");
+	const stripe = Stripe(
+		"sk_test_51Nq7BXCCN8mM1iY0qavKDs0OQClwegL9KrcoqvQcFedjvsry5Ljtrmgh0pEaTnU0JHrRjZIkSQnLpHCeIO2e8dMV00k7UsPVy2"
+	);
+	const res = await stripe.products.list({
+		expand: ["data.default_price"]
+	});
+	const products = res.data;
+	return products;
 }
 
-export default function Cases() {
-	const caseList = allCases?.map((compcase: Case) => (
-		<Card
-			key={compcase.id}
-			image={compcase.image}
-			price={compcase.price}
-			title={compcase.name}>
-			<p>{compcase.height}</p>
-			<p>{compcase.width}</p>
-			<p>{compcase.depth}</p>
-			<p>{compcase.weight}</p>
-		</Card>
-	));
-
+export default async function Cases() {
+	const products = await getStripeProducts();
+	/* console.log(products); */
 	return (
-		<>
-			<div>
-				<h1 className="text-3xl font-bold text-center m-4 text-secondary">
-					CASES
-				</h1>
-				<div className="grid grid-cols-1 gap-6 m-6 md:grid-cols-2 xl:grid-cols-3">
-					{caseList}
-				</div>
+		<div className="p-6 flex flex-col">
+			<h1 className="text-3xl font-bold p-6 text-center">Cases</h1>
+			<div className="mx-auto w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
+				{products
+					.filter(
+						(product: any) => product.metadata.category === "case"
+					)
+					.map((product: any) => (
+						<ProductCard id={product.id} product={product} />
+					))}
 			</div>
-		</>
+		</div>
 	);
 }

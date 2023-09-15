@@ -8,18 +8,17 @@ export default function ProductPage(props: any) {
 	const product = useCart((state) => state.product);
 	const addItemToCart = useCart((state) => state.addItemToCart);
 	const [quantity, setQuantity] = useState(1);
-	const searchParams = props.searchParams;
 
 	/* console.log(product);
 	console.log(product.features); */
 
-	const productFeatures = product.features.map((feature: any) => {
+	/* const productFeatures = product.features.map((feature: any) => {
 		return (
 			<div className="flex flex-col gap-2 mt-2" key={feature.name}>
 				<h3 className="text-xl font-bold">{feature.name}</h3>
 			</div>
 		);
-	});
+	}); */
 
 	function handleAddToCart() {
 		const newItem = {
@@ -43,7 +42,17 @@ export default function ProductPage(props: any) {
 				<div className="flex flex-col gap-2 p-4 justify-between">
 					<div className="flex flex-col lg:items-start text-xl items-center justify-between gap-2">
 						<h3 className="text-3xl font-bold">{product.name}</h3>
-						{productFeatures}
+						{product.features.map((feature: any) => {
+							return (
+								<div
+									className="flex flex-col gap-2 mt-2"
+									key={feature.name}>
+									<h3 className="text-xl font-bold">
+										{feature.name}
+									</h3>
+								</div>
+							);
+						})}
 						<p className="font-bold text-3xl mt-2">
 							£{product.default_price.unit_amount / 100}
 						</p>

@@ -1,22 +1,33 @@
 "use client";
+import React from "react";
+import { useState } from "react";
 import useCart from "../(store)/store";
 import Image from "next/image";
 
 export default function ProductPage(props: any) {
-	const { searchParams } = props;
 	const product = useCart((state) => state.product);
 	const addItemToCart = useCart((state) => state.addItemToCart);
+	const [quantity, setQuantity] = useState(1);
 
 	console.log(product);
+	console.log(product.features);
 
-	if (!product?.name) {
+	const productFeatures = product.features.map((feature: any) => {
+		return (
+			<div className="flex flex-col gap-2 mt-2">
+				<h3 className="text-xl font-bold">{feature.name}</h3>
+			</div>
+		);
+	});
+
+	if (!product) {
 		window.location.href = "/";
 	}
 
 	function handleAddToCart() {
 		const newItem = {
 			product: product,
-			quantity: 1
+			quantity: quantity
 		};
 		addItemToCart({ newItem });
 	}
@@ -34,17 +45,42 @@ export default function ProductPage(props: any) {
 				</div>
 				<div className="flex flex-col gap-2 p-4 justify-between">
 					<div className="flex flex-col lg:items-start text-xl items-center justify-between gap-2">
-						<h3 className="text-2xl font-bold">{product.name}</h3>
-						<p className="text-sm flex-1">{product.description}</p>
-						<p className="font-bold">
+						<h3 className="text-3xl font-bold">{product.name}</h3>
+						{productFeatures}
+						<p className="font-bold text-3xl mt-2">
 							£{product.default_price.unit_amount / 100}
 						</p>
 					</div>
-					<button
-						className="btn btn-secondary"
-						onClick={handleAddToCart}>
-						Add to Cart
-					</button>
+					<div>
+						<div className="w-full flex justify-center">
+							<button
+								className="btn btn-accent w-12 h-10"
+								onClick={() =>
+									setQuantity((prevquantity) =>
+										prevquantity > 2 ? prevquantity - 1 : 1
+									)
+								}>
+								-
+							</button>
+							<button className="btn btn-wide h-10">
+								{quantity}
+							</button>
+							<button
+								className="btn btn-accent w-12 h-10"
+								onClick={() =>
+									setQuantity(
+										(prevquantity) => prevquantity + 1
+									)
+								}>
+								+
+							</button>
+						</div>
+						<button
+							className="btn btn-secondary w-full mt-4"
+							onClick={handleAddToCart}>
+							Add to Cart
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

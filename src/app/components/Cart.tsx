@@ -41,6 +41,11 @@ export default function Cart() {
 				<label htmlFor="my-drawer-4" className="drawer-overlay"></label>
 				<div className=" p-4 w-96 h-full bg-base-200 text-base-content">
 					<h3 className="text-3xl font-bold">Cart</h3>
+					<h2 className="text-sm font-bold">
+						Test Card Number: 4242 4242 4242 4242
+					</h2>
+					<h2 className="text-sm font-bold">CVC: Any 3 digits</h2>
+					<h2 className="text-sm font-bold">Date: Any future date</h2>
 					<div className="flex flex-col justify-between">
 						<div className="">
 							{cart.length === 0 && (

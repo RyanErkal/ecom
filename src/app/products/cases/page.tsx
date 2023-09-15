@@ -25,7 +25,7 @@ export default async function Cases() {
 						(product: any) => product.metadata.category === "case"
 					)
 					.map((product: any) => (
-						<ProductCard id={product.id} product={product} />
+						<ProductCard key={product.id} product={product} />
 					))}
 			</div>
 		</div>

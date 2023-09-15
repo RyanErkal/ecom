@@ -3,7 +3,6 @@ import React from "react";
 import { useState } from "react";
 import useCart from "../(store)/store";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 export default function ProductPage(props: any) {
 	const product = useCart((state) => state.product);
@@ -14,14 +13,9 @@ export default function ProductPage(props: any) {
 	/* console.log(product);
 	console.log(product.features); */
 
-	if (!product) {
-		const router = useRouter();
-		router.push("/");
-	}
-
 	const productFeatures = product.features.map((feature: any) => {
 		return (
-			<div className="flex flex-col gap-2 mt-2">
+			<div className="flex flex-col gap-2 mt-2" key={feature.name}>
 				<h3 className="text-xl font-bold">{feature.name}</h3>
 			</div>
 		);

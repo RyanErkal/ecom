@@ -25,7 +25,7 @@ export default async function Gpus() {
 						(product: any) => product.metadata.category === "gpu"
 					)
 					.map((product: any) => (
-						<ProductCard id={product.id} product={product} />
+						<ProductCard key={product.id} product={product} />
 					))}
 			</div>
 		</div>

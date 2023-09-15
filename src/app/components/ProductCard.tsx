@@ -7,10 +7,10 @@ import useCart from "../(store)/store";
 
 export default function ProductCard({
 	product,
-	id
+	key
 }: {
 	product: any;
-	id: any;
+	key: any;
 }) {
 	const setProduct = useCart((state: any) => state.setProduct);
 	const addItemToCart = useCart((state) => state.addItemToCart);
@@ -35,7 +35,7 @@ export default function ProductCard({
 	return (
 		<div
 			className="card xl:card-side bg-base-200 shadow-xl cursor-pointer hover:shadow-2xl transition-all ease-in-out"
-			key={id}
+			key={key}
 			onClick={onProductClick}>
 			<figure className="pl-4 pt-8 lg:py-8">
 				<Image

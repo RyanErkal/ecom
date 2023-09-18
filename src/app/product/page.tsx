@@ -5,7 +5,14 @@ import useCart from "../(store)/store";
 import Image from "next/image";
 
 export default function ProductPage(props: any) {
-	const product = useCart((state) => state.product) ?? props.product;
+	const product = useCart((state) => state.product) ?? {
+		name: "Loading...",
+		description: "Loading...",
+		images: ["https://via.placeholder.com/600"],
+		default_price: { unit_amount: 0 },
+		features: [{ name: "Loading..." }],
+		id: "Loading..."
+	};
 	const addItemToCart = useCart((state) => state.addItemToCart);
 	const [quantity, setQuantity] = useState(1);
 

@@ -5,7 +5,7 @@ import useCart from "../(store)/store";
 import Image from "next/image";
 
 export default function ProductPage(props: any) {
-	const product = useCart((state) => state.product);
+	const product = useCart((state) => state.product) ?? props.product;
 	const addItemToCart = useCart((state) => state.addItemToCart);
 	const [quantity, setQuantity] = useState(1);
 

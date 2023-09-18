@@ -3,11 +3,15 @@ import React from "react";
 import { useState } from "react";
 import useCart from "../(store)/store";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ProductPage(props: any) {
 	const product = useCart((state) => state.product);
 	const addItemToCart = useCart((state) => state.addItemToCart);
 	const [quantity, setQuantity] = useState(1);
+	const router = useRouter();
+
+	!product.name && router.push("/");
 
 	console.log(product);
 	/* console.log(product.features); */

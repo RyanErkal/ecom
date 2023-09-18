@@ -32,16 +32,22 @@ export default function ProductPage(props: any) {
 		<div className="flex flex-col p-6 bg-base-200">
 			<div className="grid grid-cols-1 lg:grid-cols-2 w-full mx-auto">
 				<div className="m-auto">
-					<Image
-						src={product.images[0]}
-						alt={product.name}
-						width={600}
-						height={600}
-					/>
+					{product && (
+						<Image
+							src={product.images[0]}
+							alt={product.name}
+							width={600}
+							height={600}
+						/>
+					)}
 				</div>
 				<div className="flex flex-col gap-2 p-4 justify-between">
 					<div className="flex flex-col lg:items-start text-xl items-center justify-between gap-2">
-						<h3 className="text-3xl font-bold">{product.name}</h3>
+						{product && (
+							<h3 className="text-3xl font-bold">
+								{product.name}
+							</h3>
+						)}
 						{product.features &&
 							product.features.map((feature: any) => {
 								return (
@@ -54,9 +60,11 @@ export default function ProductPage(props: any) {
 									</div>
 								);
 							})}
-						<p className="font-bold text-3xl mt-2">
-							£{product.default_price.unit_amount / 100}
-						</p>
+						{product && (
+							<p className="font-bold text-3xl mt-2">
+								£{product.default_price.unit_amount / 100}
+							</p>
+						)}
 					</div>
 					<div>
 						<div className="w-full flex justify-center px-12">

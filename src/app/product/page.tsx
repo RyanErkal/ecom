@@ -5,19 +5,12 @@ import useCart from "../(store)/store";
 import Image from "next/image";
 
 export default function ProductPage(props: any) {
-	const product = useCart((state) => state.product) ?? {
-		name: "Loading...",
-		description: "Loading...",
-		images: ["https://via.placeholder.com/600"],
-		default_price: { unit_amount: 0 },
-		features: [{ name: "Loading..." }],
-		id: "Loading..."
-	};
+	const product = useCart((state) => state.product);
 	const addItemToCart = useCart((state) => state.addItemToCart);
 	const [quantity, setQuantity] = useState(1);
 
-	/* console.log(product);
-	console.log(product.features); */
+	console.log(product);
+	/* console.log(product.features); */
 
 	/* const productFeatures = product.features.map((feature: any) => {
 		return (
@@ -39,7 +32,7 @@ export default function ProductPage(props: any) {
 		<div className="flex flex-col p-6 bg-base-200">
 			<div className="grid grid-cols-1 lg:grid-cols-2 w-full mx-auto">
 				<div className="m-auto">
-					{product && (
+					{product.images && (
 						<Image
 							src={product.images[0]}
 							alt={product.name}
@@ -67,7 +60,7 @@ export default function ProductPage(props: any) {
 									</div>
 								);
 							})}
-						{product && (
+						{product.default_price && (
 							<p className="font-bold text-3xl mt-2">
 								£{product.default_price.unit_amount / 100}
 							</p>
